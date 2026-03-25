@@ -24,7 +24,7 @@ def main():
     # Recherche
     search = st.text_input("🔍 Rechercher un produit")
     if search:
-        data = data[data["product"].str.contains(search)]
+        data = data[data["product"].str.contains(search, regex=False, na=False)]
 
     # Filtre
     products = data["product"].unique().tolist()
@@ -43,7 +43,7 @@ def main():
 
     # Sidebar
     st.sidebar.title("Détail transaction")
-    row_index = st.sidebar.number_input("Numéro de ligne", min_value=1, max_value=len(filtered), value=1)
+    row_index = st.sidebar.number_input("Numéro de ligne", min_value=min(1, len(filtered)-1), max_value=len(filtered)-1, value=min(1, len(filtered)-1))
     if st.sidebar.button("Voir détail") :
         row = filtered.iloc[row_index]
         st.sidebar.write(f"Produit: {row['product']}")
