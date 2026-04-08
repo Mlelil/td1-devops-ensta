@@ -3,7 +3,7 @@ import pandas as pd
 
 st.set_page_config(page_title="ENSTArtup Analytics", page_icon="📊")
 st.title("📊 ENSTArtup Analytics")
-st.write("Bienvenue sur le dashboard de ENSTArtup !")
+st.write("Bienvenue auuu dashboard de ENSTArtup !")
 
 def load_data():
     return pd.read_csv("data/sales.csv")

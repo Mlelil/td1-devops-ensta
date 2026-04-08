@@ -1,0 +1,17 @@
+services:
+  app:
+    build: .
+    ports:
+      - "8501:8501"
+    environment:
+      - DATABASE=/app
+    depends_on:
+      - redis
+    volumes:
+      - db_data:/data
+
+  redis:
+    image: redis:alpine
+
+volumes:
+  db_data:
