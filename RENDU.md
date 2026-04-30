@@ -47,3 +47,39 @@ git merge crée un commit de fusion qui préserve l'historique des deux branches
 
 ## Exercices 5/6
 Je me suis arrêté là
+
+
+---------------------------------------------------------------------------------------------------------------------
+
+# Rendu TD2 - Docker
+
+## Exercice 1
+
+- Que se passe-t-il si vous modifiez `app.py` ? Pourquoi ?
+Les changements ne sont pas visibles. Il faut rebuilder l'app docker car le code est déjà compilé.
+
+- Comment arrêtez-vous le container ?
+Un bon Ctrl+C ou en utilisant docker stop id_du_container
+
+- Quelle commande permet de voir les containers en cours d'exécution ?
+docker ps
+
+## Exercice 2 - Volumes
+
+- Pourquoi le changement est-il visible sans rebuild ?
+Car le volume monte le dossier local directement dans le container et non compilé et inchangeable
+
+- Si vous ajoutez une nouvelle dépendance dans `requirements.txt`, est-ce que le volume suffit ? Pourquoi ?
+Par contre il faut rebuild, car le volume fait rentrer des fichiers, mais les dépendances sont prises en compte
+au moment de créer le container, et donc le volume ne peut pas le prendre en compte.
+
+## Exercice 3 - Docker Compose
+
+- Pourquoi utilisez-vous `redis` comme hostname et pas `localhost` ?
+Docker Compose avec redis va attribuer à chaque service un nom de service lui-même dans son réseau interne. redis:6379 va désigner une instance de l'application là ou localhost:8501 va désigner le container entier.
+
+- Que fait `depends_on` ? Est-ce suffisant pour garantir que Redis est prêt ?
+Cela va indiquer à Docker Compose l'ordre de démarrage, mais ce n'est pas suffisant, car le 2e service, s'il est rapide, peut démarrer avant le 1er.
+
+- Comment vérifiez-vous que Redis répond depuis l'intérieur du container app ?
+jsp, peut-être avec un redis-cli ping
