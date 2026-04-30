@@ -11,7 +11,7 @@ def load_data():
 def display_metrics(data):
     total = data["amount"].sum()
     count = len(data)
-    avg = total // count
+    avg = total // count if count > 0 else 0
 
     col1, col2, col3 = st.columns(3)
     col1.metric("Total ventes", f"{total} €")
@@ -24,7 +24,7 @@ def main():
     # Recherche
     search = st.text_input("🔍 Rechercher un produit")
     if search:
-        data = data[data["product"].str.contains(search)]
+        data = data[data["product"].str.contains(search, regex=False, na=False)]
 
     # Filtre
     products = data["product"].unique().tolist()
@@ -43,9 +43,9 @@ def main():
 
     # Sidebar
     st.sidebar.title("Détail transaction")
-    row_index = st.sidebar.number_input("Numéro de ligne", min_value=1, max_value=100, value=1)
-    if st.sidebar.button("Voir détail"):
-        row = filtered.iloc[row_index] 
+    row_index = st.sidebar.number_input("Numéro de ligne", min_value=min(1, len(filtered)-1), max_value=len(filtered)-1, value=min(1, len(filtered)-1))
+    if st.sidebar.button("Voir détail") :
+        row = filtered.iloc[row_index]
         st.sidebar.write(f"Produit: {row['product']}")
         st.sidebar.write(f"Montant: {row['amount']} €")
 
