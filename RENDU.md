@@ -10,7 +10,7 @@ avant de remerger vers le main.
 
 ## Exercice 2 - Capture The Bug
 
-### Bug 1 — Division par zéro
+### Bug 1 - Division par zéro
 - Déclencheur : Ecrire un numéro de ligne > aux lignes présentes dans la database
 - Commit fautif : 7abdaed
 - Auteur : Serpico serpico@nypd.gov
@@ -49,7 +49,7 @@ git merge crée un commit de fusion qui préserve l'historique des deux branches
 Je me suis arrêté là
 
 
----------------------------------------------------------------------------------------------------------------------
+
 
 # Rendu TD2 - Docker
 
@@ -83,3 +83,53 @@ Cela va indiquer à Docker Compose l'ordre de démarrage, mais ce n'est pas suff
 
 - Comment vérifiez-vous que Redis répond depuis l'intérieur du container app ?
 jsp, peut-être avec un redis-cli ping
+
+
+
+# TD 3 - Azure
+## Exercice 1 : Azure Container Registry
+
+- Quelle est la différence entre Docker Hub et ACR ?
+Docker Hub est public et utilisé pour partager des images, tandis que Azure Container Registry (ACR) est privé et intégré à Azure, conçu pour un usage d'entreprise avec plus de sécurité
+
+- Pourquoi utiliser un registry privé en entreprise ?
+Pour sécuriser les image, contrôler les accès ou encore éviter les fuites de données de la PI
+
+
+
+## Exercice 2 : Azure Container Apps
+
+- Quelle est la différence entre Container Apps et une VM classique ?
+Container Apps est un service qui exécute des containers sans gérer d’infrastructure, alors qu’une VM nécessite la gestion complète du système depuis l'OS jusqu'à l'app
+
+
+
+- Que signifie "serverless" ?
+L’utilisateur ne gère pas les serveurs. Le cloud gère tout automatiquement. Par exemple container Apps est serverless, on n'a pas besoin de gérer le scaling, la disponibilité ou l’exécution.
+
+- Combien de replicas tournent par défaut ?
+1 version
+
+
+## Exercice 3 : Variables d'environnement
+
+- Où sont stockées ces variables dans Azure ?
+Elles sont stockées dans la configuration du service Container Apps sur la page web d'Azure
+
+- Sont-elles visibles en clair quelque part ?
+Oui, elles peuvent être visibles en clair dans la configuration du service si elles ne sont pas configurées comme privé
+
+- En production, comment protégeriez-vous des valeurs sensibles (clés API, mots de passe) ?
+On peut utiliser le service Azure Key Vault qui est designé exactement pour ça je crois
+
+
+## Exercice 4 : Scaling & Load Testing
+
+- Combien de replicas ont été créés pendant le test ?
+5
+
+- Combien de temps faut-il pour qu'un nouveau replica démarre ?
+A peu près une dizaine de secondes
+
+Q11 - Que se passe-t-il quand le trafic diminue ?
+Le nombre de replicas diminue automatiquement pour économiser les ressources.
