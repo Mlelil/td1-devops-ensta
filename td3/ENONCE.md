@@ -159,11 +159,11 @@ az containerapp create \
   --name enstartup-app \
   --resource-group rg-enstartup \
   --environment enstartup-env \
-  --image enstartupregistry.azurecr.io/enstartup:v1 \
+  --image enstartupregistry3.azurecr.io/enstartup:v1 \
   --target-port 8501 \
   --ingress external \
-  --registry-server enstartupregistry.azurecr.io \
-  --registry-username enstartupregistry \
+  --registry-server enstartupregistry3.azurecr.io \
+  --registry-username enstartupregistry3 \
   --registry-password $ACR_PASSWORD \
   --cpu 0.5 \
   --memory 1.0Gi
